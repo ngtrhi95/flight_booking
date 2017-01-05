@@ -1,0 +1,22 @@
+<div class="container" ng-controller="confirmCtrl" style="border: 2px solid orange; border-radius: 12px;height: 60%" >
+    <h4>Bạn đã đặt vé thành công</h4><qrcode style="display: inline-block; float: right;" data={{url}} size="200"></qrcode>
+    <br>
+    <br>
+	<br>
+    <p>Mã đặt chỗ: {{code}}</p>
+    <p>Mật khẩu tra cứu: {{pass}}</p>
+    <p>Tra cứu hành trình của bạn tại: {{link}}</p>
+    <p>Sử dụng mã QR code để tra cứu hành trình của bạn bất kì lúc nào</p>
+    <p>Nhập vào địa chỉ Email để lưu QR code này</p>
+    <br>
+    <br>
+    <br>
+    <div class="form-group">
+	  <label for="usr">Email:</label>
+	  <input type="text" class="form-control" id="usr">
+	</div>
+    <button type="button" class="btn btn-warning" style="float: right; margin-right: 20px;">OK</button>
+  	<br>
+  	<p></p>
+  	<br>
+</div>
