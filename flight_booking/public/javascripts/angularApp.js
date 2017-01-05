@@ -455,7 +455,7 @@ function deleteAll(window) {
     window.localStorage.removeItem('listSeatBook1');
     window.localStorage.removeItem('listSeatBook2');
     window.localStorage.removeItem('pass');
-    window.localStorage.removeItem('madatcho'); 
+    window.localStorage.removeItem('madatcho');
 }
 
 // $(document).ready(function() {
@@ -497,6 +497,8 @@ app.controller('MainCtrl', ['$scope', '$http', '$window', function($scope, $http
         $scope.text= 'click';
 
      };*/
+
+
     var count1 = 0;
     var count2 = 0;
     $(document).ready(function() {
@@ -552,7 +554,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$window', function($scope, $http
 
             document.getElementById("example2").style.display = "inline-block";
             document.getElementById("arrow").src = "images/arrow2.png";
-            
+
             isKhuHoi = true;
         } else {
             document.getElementById("khuhoi").className -= " btn-info";
@@ -604,71 +606,48 @@ app.controller('MainCtrl', ['$scope', '$http', '$window', function($scope, $http
 
 
     $scope.find_flights = function() {
-        if (step < 2) step = 2;
-        $window.localStorage['step'] = step;
-        var str = document.getElementById("example1").value;
-        sohanhkhach = document.getElementById("sohanhkhach").value;
-
-        listFlighs_temp1 = [];
-        listFlighs_temp2 = [];
-        chooseFlight = [0, 0];
-        var length1 = 0,
-            length2 = 0;
-        //var result = str.split("-");
-        ngaybay1 = str;
-
-        $http.get('/flights/search/?from=' + sanbaydi + '&to=' + sanbayden + '&date=' + ngaybay1 + '&amount=' + sohanhkhach)
-            .success(function(data) {
-                document.getElementById("onl_booking").style.display = "none";
-                length1 = data.length;
-                if (length1 == 0) {
-                    alert("Không còn vé cho chiều đi");
-                    if (!isKhuHoi) {
-                        //alert("Không còn vé cho chiều đi");
-                        // window.location.href = "/";
-                    }
-                }
-                for (var i = 0; i < data.length; i++) {
-                    var item = {};
-                    item.Ma = data[i].Ma;
-                    item.Ngay = data[i].Ngay;
-                    item.Gio = data[i].Gio;
-                    item.ThoiGianBay = data[i].ThoiGianBay;
-                    item.Hang = data[i].Hang;
-                    item.MucGia = data[i].MucGia;
-                    item.GiaBan = data[i].GiaBan;
-                    item.SoLuong = data[i].SoLuong;
-                    item.MaVe = data[i].MaVe;
-                    listFlighs_temp1.push(item);
-                }
-                if (!isKhuHoi) {
-                    saveStateMainCtrl($window);
-                    $window.location.href = "#/listflighs";
-                }
-            })
-            .error(function(data, status) {
-                $scope.text = "Error: " + data;
-            });
+        var empty = true;
 
         if (isKhuHoi) {
-            var str2 = document.getElementById("example2").value;
-            ngaybay2 = str2;
+            if (document.getElementById("menu1").value != "" && document.getElementById("menu2").value != "" && document.getElementById("example1").value != "" && document.getElementById("example2").value != "" && document.getElementById("sohanhkhach").value != "") {
+                empty = false;
+            }
+        } else if (document.getElementById("menu1").value != '' && document.getElementById("menu2").value != '' && document.getElementById("example1").value != '' && document.getElementById("sohanhkhach").value != '') {
+            empty = false
+        }
 
-            $http.get('/flights/search/?from=' + sanbayden + '&to=' + sanbaydi + '&date=' + ngaybay2 + '&amount=' + sohanhkhach)
+
+        if (!empty) {
+            console.log(document.getElementById("menu1").value);
+            if (document.getElementById("menu1").value == "") {
+                var a = 1;
+            }
+            if (step < 2) step = 2;
+            $window.localStorage['step'] = step;
+            var str = document.getElementById("example1").value;
+            sohanhkhach = document.getElementById("sohanhkhach").value;
+
+            listFlighs_temp1 = [];
+            listFlighs_temp2 = [];
+            chooseFlight = [0, 0];
+            var length1 = 0,
+                length2 = 0;
+            //var result = str.split("-");
+            ngaybay1 = str;
+
+            $http.get('/flights/search/?from=' + sanbaydi + '&to=' + sanbayden + '&date=' + ngaybay1 + '&amount=' + sohanhkhach)
                 .success(function(data) {
                     document.getElementById("onl_booking").style.display = "none";
-                    console.log();
-                    length2 = data.length;
-                    if (length2 == 0) {
-                        alert("Không còn vé cho chiều về");
-                        if (length1 == 0) {
+                    length1 = data.length;
+                    if (length1 == 0) {
+                        alert("Không còn vé cho chiều đi");
+                        if (!isKhuHoi) {
+                            //alert("Không còn vé cho chiều đi");
                             // window.location.href = "/";
                         }
                     }
-
                     for (var i = 0; i < data.length; i++) {
                         var item = {};
-                        console.log(data[i].Ngay);
                         item.Ma = data[i].Ma;
                         item.Ngay = data[i].Ngay;
                         item.Gio = data[i].Gio;
@@ -678,14 +657,54 @@ app.controller('MainCtrl', ['$scope', '$http', '$window', function($scope, $http
                         item.GiaBan = data[i].GiaBan;
                         item.SoLuong = data[i].SoLuong;
                         item.MaVe = data[i].MaVe;
-                        listFlighs_temp2.push(item);
+                        listFlighs_temp1.push(item);
                     }
-                    saveStateMainCtrl($window);
-                    $window.location.href = "#/listflighs";
+                    if (!isKhuHoi) {
+                        saveStateMainCtrl($window);
+                        $window.location.href = "#/listflighs";
+                    }
                 })
                 .error(function(data, status) {
                     $scope.text = "Error: " + data;
                 });
+
+            if (isKhuHoi) {
+                var str2 = document.getElementById("example2").value;
+                ngaybay2 = str2;
+
+                $http.get('/flights/search/?from=' + sanbayden + '&to=' + sanbaydi + '&date=' + ngaybay2 + '&amount=' + sohanhkhach)
+                    .success(function(data) {
+                        document.getElementById("onl_booking").style.display = "none";
+                        console.log();
+                        length2 = data.length;
+                        if (length2 == 0) {
+                            alert("Không còn vé cho chiều về");
+                            if (length1 == 0) {
+                                // window.location.href = "/";
+                            }
+                        }
+
+                        for (var i = 0; i < data.length; i++) {
+                            var item = {};
+                            console.log(data[i].Ngay);
+                            item.Ma = data[i].Ma;
+                            item.Ngay = data[i].Ngay;
+                            item.Gio = data[i].Gio;
+                            item.ThoiGianBay = data[i].ThoiGianBay;
+                            item.Hang = data[i].Hang;
+                            item.MucGia = data[i].MucGia;
+                            item.GiaBan = data[i].GiaBan;
+                            item.SoLuong = data[i].SoLuong;
+                            item.MaVe = data[i].MaVe;
+                            listFlighs_temp2.push(item);
+                        }
+                        saveStateMainCtrl($window);
+                        $window.location.href = "#/listflighs";
+                    })
+                    .error(function(data, status) {
+                        $scope.text = "Error: " + data;
+                    });
+            }
         }
     }
 }]);
@@ -950,24 +969,22 @@ function disable7days() {
     var ngaydi = stringToDate(ngaybay1, "dd-MM-yyyy", "-");
     var ngayve = stringToDate(ngaybay2, "dd-MM-yyyy", "-");
 
-    if (chooseFlight[1] != 0)
-    {
-            if (chooseFlight[1].Ngay != null) {
-                ngayve = stringToDate(chooseFlight[1].Ngay, "dd-MM-yyyy", "-")
-            } else if (NgayVeChoose != null) {
-                ngayve = stringToDate(NgayVeChoose, "dd-MM-yyyy", "-")
-            }
-    }   
+    if (chooseFlight[1] != 0) {
+        if (chooseFlight[1].Ngay != null) {
+            ngayve = stringToDate(chooseFlight[1].Ngay, "dd-MM-yyyy", "-")
+        } else if (NgayVeChoose != null) {
+            ngayve = stringToDate(NgayVeChoose, "dd-MM-yyyy", "-")
+        }
+    }
 
-    if (chooseFlight[0] != 0)
-    {
+    if (chooseFlight[0] != 0) {
         if (chooseFlight[0].Ngay != null) {
             ngaydi = stringToDate(chooseFlight[0].Ngay, "dd-MM-yyyy", "-");
         } else if (NgayDiChoose != null) {
             ngaydi = stringToDate(NgayDiChoose, "dd-MM-yyyy", "-");
         }
     }
-   
+
 
     var now = new Date();
     now.setDate(now.getDate() - 1);
@@ -1042,7 +1059,7 @@ app.controller('FlightCtrl', ['$scope', '$http', '$window', function($scope, $ht
     if (step < 2) {
         redirect();
     } else {
-         $('#groupBtn').hide();
+        $('#groupBtn').hide();
         //chooseFlight = [0, 0];
         activeStep = 2;
         restoreStepPanel(2);
@@ -1427,12 +1444,11 @@ function isBookCompleted(num) {
     return false;
 }
 
-function getRandom()
-{
+function getRandom() {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    for( var i=0; i < 5; i++ )
+    for (var i = 0; i < 5; i++)
         text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
@@ -1481,9 +1497,8 @@ app.controller('paymentCtrl', ['$scope', '$http', '$window', function($scope, $h
                         .success(function(data) {
                             //-----------------Insert Seat-----------------------------------     
                             var listSeatBook = [listSeatBook1, listSeatBook2];
-                            if ($window.localStorage['pass'] == null)
-                            {
-                               $window.localStorage['pass'] =  getRandom(); ;
+                            if ($window.localStorage['pass'] == null) {
+                                $window.localStorage['pass'] = getRandom();;
                             }
                             var item = {};
                             item.code = madatcho;
@@ -1654,11 +1669,10 @@ app.controller('confirmCtrl', ['$scope', '$http', '$window', function($scope, $h
     document.getElementById("top").style.display = "none";
     adminMode = 0;
     var pass = "";
-    if ($window.localStorage['pass'] == null)
-    {
-       pass = getRandom(); 
-       $window.localStorage['pass'] = pass;
-    } 
+    if ($window.localStorage['pass'] == null) {
+        pass = getRandom();
+        $window.localStorage['pass'] = pass;
+    }
     $('#groupBtn').hide();
     $scope.code = $window.localStorage['madatcho'];
     $scope.pass = $window.localStorage['pass'];

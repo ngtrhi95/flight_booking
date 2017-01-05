@@ -6,7 +6,7 @@ function refreshPage() {
 
 function booking_display() {
     count++;
-    document.getElementById("booking_banner").style.display = "block";
+    document.getElementById("booking_banner").style.display = "inline-block";
     document.getElementById("top").setAttribute('class', 'blur');
     document.getElementById("khuhoi").className += " btn-info";
     if (count % 2 == 0) {

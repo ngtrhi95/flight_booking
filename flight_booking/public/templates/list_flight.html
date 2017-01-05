@@ -1,7 +1,7 @@
 <div class="container" ng-controller="FlightCtrl">
     <div class="col-md-9">
-    <h3 style="color:#006666; font-weight: bold;">Danh sách chuyến bay</h3>
-         <div ng-repeat="form in data">
+        <h3 style="color:#006666; font-weight: bold;">Danh sách chuyến bay</h3>
+        <div ng-repeat="form in data">
             <br>
             <form>
                 <h3>Khởi hành từ <span style="color: red;">{{form[1]}}</span> đến <span style="color: red;">{{form[2]}}</span></h3>
@@ -67,6 +67,7 @@
             <p>Thời gian khởi hành: {{startDate2}}</p>
             <p>Thời gian bay: {{duration2}}</p>
         </div>
-        <button id="btn_dat_ve" style="float: right;" type="submit" class="btn btn-warning" ng-click="changeToPassenger()" disabled="true">Tiếp tục</a> </button>
+        <button id="btn_dat_ve" style="float: right;" type="submit" class="btn btn-warning" ng-click="changeToPassenger()" disabled="true">Tiếp tục</a>
+        </button>
     </div>
 </div>
