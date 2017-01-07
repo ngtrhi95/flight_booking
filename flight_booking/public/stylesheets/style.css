@@ -34,7 +34,7 @@ a {
     width: 100%;
 }
 
-#booking_banner {
+#booking_banner, #info_banner {
     display: none;
     z-index: 999;
     position: absolute;
@@ -49,6 +49,14 @@ a {
     width: 900px;
     height: 280px;
     background: #ccc;
+}
+
+#info_form {
+    margin: 0 auto;
+    width: 900px;
+    height: 280px;
+    background: #ccc;
+    padding: 10px;
 }
 
 .btn_in_form {

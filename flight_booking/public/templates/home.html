@@ -1,6 +1,7 @@
  
 <link rel="stylesheet" href="css/style.css">
-<div id="booking_banner" ng-controller="MainCtrl">
+<div ng-controller="MainCtrl">
+    <div id="booking_banner" >
     <form id="booking_form">
         <button type="button" class="close" data-dismiss="modal" onclick="close_form()">&times;</button>
         <button type="button" class="btn btn-default btn_in_form" id="khuhoi" ng-click="change_type(0)">Khứ hồi</button>
@@ -40,7 +41,34 @@
             <button type="submit" class="btn btn-warning" style="float: right; margin-right: 20px;" ng-click="find_flights()" id="timchuyenbay">TÌM VÉ MÁY BAY</button>
         </div>
     </form>
+    
 </div>
+<div style="margin-top: 10px; margin-left: 20px;" id="info_banner">
+        <form id="info_form">
+            <button type="button" class="close" data-dismiss="modal" onclick="close_form1()">&times;</button>
+            <p style="color:#000000">Tra cứu hành trình</p>
+            <p style="color: red">{{message}}</p>
+            <input type="text"  class="form-control" id="code" placeholder="Mã đặt chỗ">
+            <input type="password" class="form-control" id="pass" placeholder="Mật khẩu">
+            <br>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-warning" style="float: right; margin-right: 20px;" ng-click="find_ticket()" id="timchuyenbay">TRA CỨU</button>
+        </form>
+    </div>
+    <div id="bookDialog" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body" style="text-align:center">
+                <div class="loader"></div>
+                <p>Đang tìm chuyến bay...</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
 <script type="text/javascript">
 // When the document is ready
 </script>

@@ -1,23 +1,44 @@
-var count = 0;
+var count1 = 0;
+var count2 = 0;
 
 function refreshPage() {
     location.reload();
 }
 
 function booking_display() {
-    count++;
+    count1++;
+    count2 = 0;
     document.getElementById("booking_banner").style.display = "inline-block";
+    document.getElementById("info_banner").style.display = "none";
     document.getElementById("top").setAttribute('class', 'blur');
     document.getElementById("khuhoi").className += " btn-info";
-    if (count % 2 == 0) {
+    if (count1 % 2 == 0) {
         document.getElementById("booking_banner").style.display = "none";
         document.getElementById("top").setAttribute('class', null);
     }
 }
 
 function close_form() {
+    count1 = 0;
     document.getElementById("booking_banner").style.display = "none";
     document.getElementById("top").setAttribute('class', null);
+}
+function close_form1() {
+    count2 = 0;
+    document.getElementById("info_banner").style.display = "none";
+    document.getElementById("top").setAttribute('class', null);
+}
+
+function info_display(){
+    count2++;
+    count1 = 0;
+    document.getElementById("info_banner").style.display = "inline-block";
+    document.getElementById("booking_banner").style.display = "none";
+    document.getElementById("top").setAttribute('class', 'blur');
+    if (count2 % 2 == 0) {
+        document.getElementById("info_banner").style.display = "none";
+        document.getElementById("top").setAttribute('class', null);
+    }
 }
 
 function change_type(a) {
