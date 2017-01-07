@@ -94,7 +94,7 @@ app.factory('auth', ['$http', '$window',
 ]);
 
 app.factory('socket', function() {
-  var socket = io.connect('http://cnm-flight-booking.herokuapp.com:3000');
+  var socket = io.connect('http://cnm-flight-booking.herokuapp.com');
   return socket; 
 });
 

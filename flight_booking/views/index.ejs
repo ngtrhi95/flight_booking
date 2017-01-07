@@ -8,7 +8,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
   <script src="javascripts/angularApp.js"></script>
   <script src="javascripts/jquery-3.1.1.min.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
+  
   <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
   <link rel="stylesheet" href="stylesheets/datepicker.css">
   <link rel="stylesheet" href="stylesheets/bootstrap.css">
@@ -19,7 +19,14 @@
   <script src="javascripts/bootstrap-datepicker.js"></script>
   <script src="javascripts/angular-qrcode.js"></script>
   <script src="javascripts/qrcode.js"></script>
-
+   <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      var el = document.getElementById('server-time');
+      socket.on('time', function(timeString) {
+        el.innerHTML = 'Server time: ' + timeString;
+      });
+    </script>
 <script src="javascripts/jssor.slider-22.0.15.mini.js" type="text/javascript" data-library="jssor.slider.mini" data-version="22.0.15"></script>
 </head>
 
