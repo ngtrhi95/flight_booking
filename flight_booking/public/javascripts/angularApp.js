@@ -94,8 +94,8 @@ app.factory('auth', ['$http', '$window',
 ]);
 
 app.factory('socket', function() {
-  var socket = io.connect('http://cnm-flight-booking.herokuapp.com:3000');
-  return socket; 
+    var socket = io.connect('http://cnm-flight-booking.herokuapp.com:3000');
+    return socket;
 });
 
 app.directive('onFinishRender', function($timeout) {
@@ -261,11 +261,10 @@ function restoreStepPanel(id) {
     }
 
 }
-function disableStep(s)
-{
-    for (var i = s + 1; i <= step; i++)
-    {
-         document.getElementById("step" + i).disabled = true;
+
+function disableStep(s) {
+    for (var i = s + 1; i <= step; i++) {
+        document.getElementById("step" + i).disabled = true;
     }
 }
 
@@ -687,13 +686,12 @@ app.controller('MainCtrl', ['$scope', '$http', '$window', function($scope, $http
                             $window.localStorage['Gio2'] = data[1].Gio;
                             $window.localStorage['ThoiGianBay2'] = data[1].ThoiGianBay;
                             $window.localStorage['TongTien2'] = data[1].TongTien;
-                             $window.localStorage['Ghe'] = JSON.stringify(data[3]);
-                        $window.localStorage['HanhKhach'] = JSON.stringify(data[2]);
+                            $window.localStorage['Ghe'] = JSON.stringify(data[3]);
+                            $window.localStorage['HanhKhach'] = JSON.stringify(data[2]);
 
-                        $window.localStorage['NoiDi'] = data[4][0].TenDiaDanh;
-                        $window.localStorage['NoiDen'] = data[5][0].TenDiaDanh;
-                        }else
-                        {
+                            $window.localStorage['NoiDi'] = data[4][0].TenDiaDanh;
+                            $window.localStorage['NoiDen'] = data[5][0].TenDiaDanh;
+                        } else {
                             $window.localStorage['Ghe'] = JSON.stringify(data[2]);
                             $window.localStorage['HanhKhach'] = JSON.stringify(data[1]);
 
@@ -1236,7 +1234,7 @@ app.controller('FlightCtrl', ['$scope', '$http', '$window', function($scope, $ht
         //chooseFlight = [0, 0];
         activeStep = 2;
         if ($window.localStorage['currentStep'] != null)
-        $window.localStorage['step'] = $window.localStorage['currentStep'];
+            $window.localStorage['step'] = $window.localStorage['currentStep'];
         restoreStepPanel(2);
         $('#link2').css('color', '#ffffff');
         $('#bookDialog').modal('show');
@@ -1250,16 +1248,13 @@ app.controller('FlightCtrl', ['$scope', '$http', '$window', function($scope, $ht
                 var date1Before = new Date(date1);
                 date1Before.setDate(date1.getDate() - 7 * n7daysClick1);
                 var date1Before_str = date1Before.getDate() + "-" + (date1Before.getMonth() + 1) + "-" + date1Before.getFullYear();
-                if (chooseFlight[1] != 0)
-                {
+                if (chooseFlight[1] != 0) {
                     var date2 = stringToDate(chooseFlight[1].Ngay, "dd-MM-yyyy", "-");
                     if (date1Before > date2)
                         $("#" + converDateType(chooseFlight[1].Ngay) + "t1").trigger("click");
                     else $("#" + date1Before_str + "t1").trigger("click");
-                }
-                else $("#" + date1Before_str + "t1").trigger("click");
-            }
-            else if (chooseFlight[0] != 0 && chooseFlight.length > 0) {
+                } else $("#" + date1Before_str + "t1").trigger("click");
+            } else if (chooseFlight[0] != 0 && chooseFlight.length > 0) {
                 $window.localStorage['isEnter'] = '1';
                 $("#" + converDateType(chooseFlight[0].Ngay) + "t1").trigger("click");
             } else {
@@ -1272,14 +1267,12 @@ app.controller('FlightCtrl', ['$scope', '$http', '$window', function($scope, $ht
                 var date1Before = new Date(date1);
                 date1Before.setDate(date1.getDate() - 7 * n7daysClick1);
                 var date1Before_str = date1Before.getDate() + "-" + (date1Before.getMonth() + 1) + "-" + date1Before.getFullYear();
-                if (chooseFlight[0] != 0)
-                {
+                if (chooseFlight[0] != 0) {
                     var date2 = stringToDate(chooseFlight[0].Ngay, "dd-MM-yyyy", "-");
                     if (date1Before < date2)
-                        $("#" + converDateType(chooseFlight[0].Ngay) + "t2").trigger("click"); 
+                        $("#" + converDateType(chooseFlight[0].Ngay) + "t2").trigger("click");
                     else $("#" + date1Before_str + "t2").trigger("click");
-                }
-                else $("#" + date1Before_str + "t2").trigger("click");
+                } else $("#" + date1Before_str + "t2").trigger("click");
             } else if (chooseFlight[1] != 0 && chooseFlight.length > 1) {
                 $window.localStorage['isEnter'] = '1';
                 $("#" + converDateType(chooseFlight[1].Ngay) + "t2").trigger("click");
@@ -1349,8 +1342,7 @@ app.controller('FlightCtrl', ['$scope', '$http', '$window', function($scope, $ht
                     //$window.localStorage.removeItem('r1');
                     //$window.localStorage['chooseFlight'] = JSON.stringify(chooseFlight);
                 }
-                if ( $window.localStorage['isEnter'] != '1')
-                {
+                if ($window.localStorage['isEnter'] != '1') {
                     chooseFlight[0] = 0;
                     $window.localStorage['chooseFlight'] = JSON.stringify(chooseFlight);
                     $('#' + $window.localStorage['r1']).prop("checked", false);
@@ -1360,7 +1352,7 @@ app.controller('FlightCtrl', ['$scope', '$http', '$window', function($scope, $ht
                     $window.localStorage.removeItem('listSeatBook1');
                     disableStep(2);
                     loadReview($scope);
-                    
+
                 }
                 $window.localStorage['isEnter'] = '0';
                 NgayDiChoose = infor.Ngay;
@@ -1393,7 +1385,7 @@ app.controller('FlightCtrl', ['$scope', '$http', '$window', function($scope, $ht
                         $scope.data[0][0] = [];
                         $scope.data[0][0] = listFlighs_temp1.slice();
                         $('#idTable1').show();
-                       
+
 
                     })
                     .error(function(data, status) {
@@ -1408,18 +1400,17 @@ app.controller('FlightCtrl', ['$scope', '$http', '$window', function($scope, $ht
                     //$window.localStorage.removeItem('r2');
                     //$window.localStorage['chooseFlight'] = JSON.stringify(chooseFlight);
                 }
-                if ($window.localStorage['isEnter'] != '1')
-                {
+                if ($window.localStorage['isEnter'] != '1') {
                     chooseFlight[1] = 0;
                     $window.localStorage['chooseFlight'] = JSON.stringify(chooseFlight);
                     $('#' + $window.localStorage['r2']).prop("checked", false);
                     $window.localStorage.removeItem('r2');
                     loadReview($scope);
-                    if ($window.localStorage['currentStep'] == null)$window.localStorage['currentStep'] = step;
+                    if ($window.localStorage['currentStep'] == null) $window.localStorage['currentStep'] = step;
                     $window.localStorage['step'] = 2;
                     $window.localStorage.removeItem('listSeatBook2');
                     disableStep(2);
-                    
+
                 }
                 $window.localStorage['isEnter'] = '0';
                 NgayVeChoose = infor.Ngay;
@@ -1497,7 +1488,7 @@ app.controller('FlightCtrl', ['$scope', '$http', '$window', function($scope, $ht
                 loadReview($scope);
                 document.getElementById("btn_dat_ve").disabled = false;
                 if ($window.localStorage['currentStep'] != null)
-                $window.localStorage['step'] =  $window.localStorage['currentStep'];
+                    $window.localStorage['step'] = $window.localStorage['currentStep'];
                 restoreStepPanel(2);
                 $window.localStorage.removeItem('currentStep');
             }
@@ -1706,9 +1697,8 @@ app.controller('paymentCtrl', ['$scope', '$http', '$window', function($scope, $h
                     $window.localStorage['madatcho'] = madatcho;
                     dat_ve.ThoiGianDatCho = today.toISOString().toString();
                     for (var i = 0; i < chooseFlight.length; i++) {
-                        if (chooseFlight[i] != 0)
-                        {
-                             tongtien += chooseFlight[i].GiaBan;
+                        if (chooseFlight[i] != 0) {
+                            tongtien += chooseFlight[i].GiaBan;
                             var temp = {};
                             temp.MaVe = chooseFlight[i].MaVe;
                             temp.MucGia = chooseFlight[i].MucGia;
@@ -1922,10 +1912,10 @@ app.controller('confirmCtrl', ['$scope', '$http', '$window', function($scope, $h
     document.getElementById("top").style.display = "none";
     adminMode = 0;
     var pass = "";
-    if ($window.localStorage['step'] == null || ($window.localStorage['step'] != null && $window.localStorage['step'] == 1 ))  {
+    if ($window.localStorage['step'] == null || ($window.localStorage['step'] != null && $window.localStorage['step'] == 1)) {
         step = 1;
         redirect();
-    }else if ($window.localStorage['step'] != null && $window.localStorage['step'] < 8) redirect();
+    } else if ($window.localStorage['step'] != null && $window.localStorage['step'] < 8) redirect();
 
     if ($window.localStorage['pass'] == null) {
         pass = getRandom();
@@ -2144,9 +2134,8 @@ app.controller('NotifyCtrl', ['$scope', '$http', 'auth', '$state', '$window', 's
     else {
         $('#groupBtn').hide();
         $('#stepPannel').hide();
-        $scope.sendMessage = function()
-        {
-            socket.emit('notify', {message: $('#comment').val()});
+        $scope.sendMessage = function() {
+            socket.emit('notify', { message: $('#comment').val() });
         }
     }
 }]);
@@ -2504,6 +2493,8 @@ app.controller('FlightScheduleCtrl', ['$scope', '$state', '$http', 'auth', '$win
 
 }]);
 
+var isLogOutFB = true;
+
 app.controller('JAuthCtrl', ['$scope', '$window', '$state', 'auth',
 
     function($scope, $window, $state, auth) {
@@ -2529,6 +2520,43 @@ app.controller('JAuthCtrl', ['$scope', '$window', '$state', 'auth',
                 $state.go('flightschedule');
             });
         };
+
+        $scope.facebook = {
+            username: ""
+        }
+
+        $scope.facebookLogin = function() {
+            if (isLogOutFB) {
+                FB.login(function(response) {
+                    if (response.authResponse) {
+                        FB.api('/me', 'GET', { fields: 'email, name, id, picture' }, function(response) {
+                            $scope.$apply(function() {
+                                $scope.facebook.username = response.name;
+                                $scope.fb_img = response.picture.data.url;
+                                // $state.go('flightschedule');
+                            });
+                        });
+                        // $state.go('flightschedule');
+                        document.getElementById("imgfb").style.display = "block";
+                        document.getElementById("fbname").style.display = "block";
+                        $("#facebook").html('Log out with Facebook');
+                        isLogOutFB = false;
+                        // $state.go('flightschedule');
+                    } else {
+
+                    }
+                }, {
+                    scope: 'email, user_likes',
+                    return_scopes: true
+                })
+
+            } else if (!isLogOutFB) {
+                $("#facebook").html('Log in with Facebook');
+                document.getElementById("imgfb").style.display = "none";
+                document.getElementById("fbname").style.display = "none";
+                isLogOutFB = true;
+            }
+        }
     }
 ]);
 
@@ -2651,7 +2679,7 @@ app.controller('luggageCtrl', ['$scope', '$http', 'auth', '$window',
                             .error(function(data, status) {
 
                             });
-                    }else $('#luggageDialog').modal("hide");
+                    } else $('#luggageDialog').modal("hide");
                 })
                 .error(function(data, status) {});
 
