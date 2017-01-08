@@ -29,10 +29,9 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '/')));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'node_modules/socket.io-client/dist')));
+app.use('/static', express.static('public'))
 
 app.use('/', index);
 app.use('/airports', airports);
@@ -49,14 +48,9 @@ app.use('/ticketInfo', ticketInfo);
 app.use(passport.initialize());
 
 var server = require('http').createServer(app);
+connection.init();
 
-//var port = process.env.PORT || 3000;
-
-//server.listen(port, function() {
-//  console.log('Listening on ' + port);
-//});
-
-var io = require('socket.io').listen(server);
+var io = require('socket.io')(server);
 
 io.sockets.on('connection', function(socket) {
 	  socket.on('notify', function(data) {
@@ -64,6 +58,15 @@ io.sockets.on('connection', function(socket) {
 	  	 console.log(data.message);
 	});
 });
-server.listen(process.env.PORT || 3000);
-connection.init();
+
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+server.listen(process.env.PORT || 5000);
+
 module.exports = app;
