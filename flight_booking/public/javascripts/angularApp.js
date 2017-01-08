@@ -2863,6 +2863,11 @@ function($scope, $window, $state) {
      dia_danh_di = window.localStorage['dia_danh_di'];
      dia_danh_den = window.localStorage['dia_danh_den'];
      sohanhkhach = window.localStorage['sohanhkhach'];
+
+     isKhuHoi = window.localStorage['isKhuHoi'];
+     if (isKhuHoi == "true") isKhuHoi = true;
+     else isKhuHoi = false;
+     
      if (window.localStorage['step'] != null)
          step = parseInt(window.localStorage['step']);
      else step = 1;
